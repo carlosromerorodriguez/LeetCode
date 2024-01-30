@@ -22,22 +22,22 @@ class Solution {
             return res;
         }
 
-        char[] config = new char[digits.toCharArray().length];
-        backTracking(digits, res, config, 0);
+        char[] config = new char[digits.length()];
+        backTracking(digits, config, 0, res);
         return res;
     }
 
-    private void backTracking(String digits, List<String> res, char[] config, int lvl) {
+    private void backTracking(String digits, char[] config, int lvl, List<String> res) {
         if (lvl == digits.length()) {
             res.add(new String(config));
             return;
         }
 
-        char digit = digits.charAt(lvl);
-        String letters = map.get(digit);
-        for (char letter : letters.toCharArray()) {
-            config[lvl] = letter;
-            backTracking(digits, res, config, lvl + 1);
+        char[] newLetters = map.get(digits.charAt(lvl)).toCharArray();
+
+        for (char c : newLetters) {
+            config[lvl] = c;
+            backTracking(digits, config, lvl + 1, res);
         }
     }
 }
