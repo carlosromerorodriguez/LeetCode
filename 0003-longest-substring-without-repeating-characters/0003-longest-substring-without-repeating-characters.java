@@ -1,18 +1,37 @@
+import java.util.HashMap;
+
 class Solution {
     public int lengthOfLongestSubstring(String s) {
-        int startPointer = 0, endPointer = 0, best = 0;
-        HashSet<Character> currentSubstring = new HashSet<>();
+        if (s.isEmpty()) return 0;
+        if (s.length() == 1) return 1;
 
-        while (endPointer != (s.length())) {
-            if (!currentSubstring.contains(s.charAt(endPointer))) {
-                currentSubstring.add(s.charAt(endPointer));
-                endPointer++;
-                best = Math.max(best, currentSubstring.size());
+        int res = 0;
+        int leftPointer = 0, rightPointer = 0;
+
+        while(rightPointer < s.length()) {
+            String newStr = s.substring(leftPointer, rightPointer + 1);
+            if (uniqueCharacters(newStr)) {
+                rightPointer++;
             } else {
-                currentSubstring.remove(s.charAt(startPointer));
-                startPointer++;
+                res = Math.max(res, rightPointer - leftPointer);
+                leftPointer++;
             }
         }
-        return best;
+
+        return Math.max(res, rightPointer - leftPointer);
+    }
+
+    private boolean uniqueCharacters(String newStr) {
+        HashMap<Character, Integer> chars = new HashMap<>();
+
+        for (int i = 0; i < newStr.length(); i++) {
+            char newChar = newStr.charAt(i);
+            if (chars.containsKey(newChar)) {
+                return false;
+            } else {
+                chars.put(newChar, 1);
+            }
+        }
+        return true;
     }
 }
