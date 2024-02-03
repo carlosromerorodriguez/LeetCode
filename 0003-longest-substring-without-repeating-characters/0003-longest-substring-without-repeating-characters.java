@@ -2,8 +2,7 @@ import java.util.HashMap;
 
 class Solution {
     public int lengthOfLongestSubstring(String s) {
-        if (s.isEmpty()) return 0;
-        if (s.length() == 1) return 1;
+        if (s.length() <= 1) return s.length();
 
         int res = 0;
         int leftPointer = 0, rightPointer = 0;
