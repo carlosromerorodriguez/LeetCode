@@ -3,20 +3,20 @@ import java.util.Map;
 
 class Solution {
     public int majorityElement(int[] nums) {
-        HashMap<Integer, Integer> occurrences = new HashMap<>();
-
-        for (int num : nums) {
-            occurrences.merge(num, 1, Integer::sum);
-        }
-
-        int maxNum = 0, maxOcurrences = 0;
-        for (Map.Entry<Integer, Integer> entry : occurrences.entrySet()) {
-            if (entry.getValue() > maxOcurrences) {
-                maxOcurrences = entry.getValue();
-                maxNum = entry.getKey();
+        int majority = 0, counter = 0;
+        
+        for (int i = 0; i < nums.length; i++) {
+            if (counter == 0) {
+                majority = nums[i];
+            }
+            
+            if (nums[i] == majority) {
+                counter++;
+            } else {
+                counter--;
             }
         }
-
-        return maxNum;
+        
+        return majority;
     }
 }
