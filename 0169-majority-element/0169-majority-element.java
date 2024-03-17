@@ -10,11 +10,7 @@ class Solution {
                 majority = nums[i];
             }
             
-            if (nums[i] == majority) {
-                counter++;
-            } else {
-                counter--;
-            }
+            counter += (nums[i] == majority) ? 1 : -1;
         }
         
         return majority;
